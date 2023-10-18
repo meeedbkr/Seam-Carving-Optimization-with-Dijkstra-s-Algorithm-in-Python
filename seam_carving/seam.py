@@ -28,3 +28,30 @@ def find_seam(energy):
         choices = [dp[y-1, left], dp[y-1, x], dp[y-1, right]]
         x += (choices.index(min(choices)) - 1)
     return seam
+
+
+
+def remove_seam(image, seam):
+    """
+    Remove a seam from an image.
+
+    Args:
+        image (numpy.ndarray): Input image.
+        seam (list of tuple): Seam coordinates.
+
+    Returns:
+        numpy.ndarray: Image with seam removed.
+    """
+    height, width, _ = image.shape
+    newImg = np.zeros((height, width - 1, 3), dtype=np.float64)
+
+    for y in range(height):
+        j = 0
+        for x in range(width):
+            if x != seam[y][0]:
+                newImg[y, j] = image[y, x]
+                j += 1
+
+    return newImg
+
+    return new_image

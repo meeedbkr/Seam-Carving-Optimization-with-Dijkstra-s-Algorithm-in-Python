@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 from seam_carving.energy import calculate_energy
-from seam_carving.seam import find_seam
+from seam_carving.seam import find_seam , remove_seam
 from seam_carving.visualize import draw_seam
 
 def main():
@@ -11,7 +11,8 @@ def main():
     seam = find_seam(energy)
     # Draw and save the image with the seam
     image_with_seam = draw_seam(np.copy(image), seam)
-    plt.imshow(image_with_seam)
+    image = remove_seam(image, seam).astype(np.int64)
+    plt.imshow(image)
     plt.show()
 
 if __name__ == "__main__":
